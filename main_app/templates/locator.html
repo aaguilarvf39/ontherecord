@@ -4,9 +4,18 @@
 <h1>Music Shop Locator</h1>
 <hr />
 
+{% for user in location %}
 <div>
-    {{ location.results }}
-</div>
 
+  {{ user.poi.name }}
+  {{ user.address.streetNumber }}
+  {{ user.address.streetName }}
+  {{ user.address.municipalitySubdivision }}
+  {{ user.address.countrySubdivision }}
+  {{ user.poi.url }}
+  {{ user.poi.phone }}
+  
+</div>
+{% endfor %}
 
 {% endblock %}
