@@ -2,3 +2,6 @@
 
 
 "Good bye"
+
+
+"We got this!"
