@@ -28,8 +28,9 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def locator(request):
+  #username = requests.GET.get('names')
   response = requests.get("https://api.tomtom.com/search/2/nearbySearch/.json?lat=37.337&lon=-121.89&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key=UldEI4VV32J6hKCoAPjuC0f2qbTAGiuJ")
-  location = response.json()
+  location = response.json()['results']
   return render(request, 'locator.html', {'location': location})
 
 
