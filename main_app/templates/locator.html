@@ -5,9 +5,13 @@
 <hr />
 
 
-<div>
+<!-- <div>
   {{ lat }}
-</div>
+</div> -->
+<form action="/locator" method="POST" id="form1">
+  <label for="name">&nbsp;What's your address? </label><br>&nbsp;&nbsp;<textarea id="title" name="title" rows="4" cols="50"></textarea> <br>
+  <button type="submit" form="form1" class="btn btn-success" id="submit-new">Submit</button>
+</form>
 
 {% for user in location %}
 <div class="user_address">

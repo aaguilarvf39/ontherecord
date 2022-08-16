@@ -43,15 +43,18 @@ body {
 
 }
 .rwd-table {
-  margin: 1em 0;
-  min-width: 600px;
+  margin-bottom: -75px;
   background-color: aqua;
+  display: table;
+  width: 90vh; 
+  height: 10vh;
 }
 
 tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: aqua;
+  
 }
 
 td {
@@ -63,6 +66,7 @@ main {
 }
 
 footer.page-footer {
-  padding-top: 0;
+  margin-top: 6em;
   text-align: right;
+  
 }
