@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Music Shop Locator</h1>
+<h1 class="shop_title">Music Shop Locator</h1>
 <hr />
 
 
@@ -10,17 +10,33 @@
 </div>
 
 {% for user in location %}
-<div>
-
-  {{ user.poi.name }}
-  {{ user.address.streetNumber }}
-  {{ user.address.streetName }}
-  {{ user.address.municipalitySubdivision }}
-  {{ user.address.countrySubdivision }}
-  {{ user.poi.url }}
-  {{ user.poi.phone }}
+<div class="user_address">
+  <table class="rwd-table">
+  <tr>
+    <th>Name</th>
+    <br>
+    <td>{{ user.poi.name }} </td>
+    <th>Address</th>
+    <br>
+    <td>{{ user.address.streetNumber }} <br>
+      {{ user.address.streetName }} <br>
+      {{ user.address.municipalitySubdivision }} <br>
+      {{ user.address.countrySubdivision }}</td>
+    <th>Website</th>
+    <br>
+    <td>{{ user.poi.url }}</td>
+    <th>Phone</th>
+    <br>
+    <td>{{ user.poi.phone }}</td>
+  </tr>
   
+  
+  
+  
+  
+  </table>
 </div>
+
 {% endfor %}
 
 {% endblock %}
