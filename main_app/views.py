@@ -31,11 +31,16 @@ def signup(request):
 
 def locator(request):
   api_key = os.environ['API_KEY']
-  response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat=37.337&lon=-121.89&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
+  query = "216 Spanish Drive, Las Vegas, NV 89110"
+  useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/{query}.json?key={api_key}')
+  address = useraddress.json()
+  print(address['results'][0]['position']['lat'])
+  lat = address['results'][0]['position']['lat']
+  lon = address['results'][0]['position']['lon']
+  response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
-  lon = response.json()['summary']['geoBias']['lon']
-  lat = response.json()['summary']['geoBias']['lat']
-  return render(request, 'locator.html', {'location': location, 'lon': lon, 'lat': lat})
+  print(location)
+  return render(request, 'locator.html', {'location': location, 'lat' : lat })
 
 
 def profile(request):
