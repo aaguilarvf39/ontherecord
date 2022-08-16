@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -28,9 +29,11 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def locator(request):
-  #username = requests.GET.get('names')
-  response = requests.get("https://api.tomtom.com/search/2/nearbySearch/.json?lat=37.337&lon=-121.89&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key=UldEI4VV32J6hKCoAPjuC0f2qbTAGiuJ")
+  api_key = os.environ['API_KEY']
+  response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat=37.337&lon=-121.89&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
-  return render(request, 'locator.html', {'location': location})
+  lon = response.json()['summary']['geoBias']['lon']
+  lat = response.json()['summary']['geoBias']['lat']
+  return render(request, 'locator.html', {'location': location, 'lon': lon, 'lat': lat})
 
 
