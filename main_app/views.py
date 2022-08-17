@@ -42,20 +42,14 @@ def locator(request):
   lon = address['results'][0]['position']['lon']
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
-  for user in location:
-    locator = Locator(name=user['poi']['name'], address=user['address']['streetNumber'], location=user['address']['countrySubdivision'], hours=user['address']['streetNumber'], website=user['poi']['phone'], phone=user['poi']['phone'])
-    locator.save()
-  all_locations = Locator.objects.all()
+  #for user in location:
+   # locator = Locator(name=user['poi']['name'], address=user['address']['streetNumber'], location=user['address']['countrySubdivision'], hours=user['address']['streetNumber'], website=user['poi']['phone'], phone=user['poi']['phone'])
+    #locator.save()
+  #all_locations = Locator.objects.all()
   print(request.POST)
-  print(all_locations)
   return render(request, 'locations/locator.html', {'location': location, 'lat' : lat })
 
-def locator_detail(request, locator_id):
-  locator = Locator.objects.get(id=locator_id, user=request.user)
-  return render(
-    request,
-    'locator/detail.html',
-    {
-      'locator': locator
-    }
-  )
+def locator_detail(request):
+  print(request.POST, 'locator/detail')
+  #locator = Locator.objects.get(id=locator_id, user=request.user)
+  return render(request,'locations/detail.html',{'locator': locator })
