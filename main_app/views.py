@@ -50,6 +50,8 @@ def locator(request):
   return render(request, 'locations/locator.html', {'location': location, 'lat' : lat })
 
 def locator_detail(request):
-  print(request.POST, 'locator/detail')
-  #locator = Locator.objects.get(id=locator_id, user=request.user)
-  return render(request,'locations/detail.html',{'locator': locator })
+  print(request.GET, 'locator/detail')
+ 
+
+  locator = Locator.objects.get(location=request.location)
+  return render(request,'locations/detail.html', { 'locator': locator })
