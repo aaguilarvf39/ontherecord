@@ -12,13 +12,15 @@
 <br>
 <br>
 <br>
-<form action="/locator" method="POST" id="form1">
-  <label for="name" class="address_search">&nbsp;What's your address? </label><br><br><textarea id="title" name="title" rows="4" cols="50"></textarea> <br>
+<form action="{% url 'locator' %}" method="POST" id="form1">
+  {% csrf_token %}
+  <label for="name" class="address_search">&nbsp;Address</label><br><br>
+  <textarea id="title" name="query-address" rows="4" cols="50"></textarea> <br>
   <button type="submit" form="form1" class="btn btn-success" id="submit-new">Submit</button>
 </form>
 <br>
 
-{% for user in location %}
+{% for user in location %}%%
 
   <table class="rwd-table">
     <thead>
@@ -32,13 +34,13 @@
      <tbody>
     <tr>
       <br>
-    <td>{{ user.poi.name }} </td> &nbsp;
+    <td><a href="">{{ user.poi.name }}</a></td>&nbsp;
     <div class="user_address">
       <br>
     <td>{{ user.address.streetNumber }} <br> &nbsp;
       {{ user.address.streetName }} <br> &nbsp;
       {{ user.address.municipality }} <br> &nbsp;
-      {{ user.address.municipalitySubdivision }}  &nbsp;
+      {{ user.address.countrySubdivision }} </td>
       {{ user.address.countrySubdivision }} </td>
       </div>
       <div class="website">

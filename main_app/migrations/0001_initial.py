@@ -15,8 +15,10 @@ class Migration(migrations.Migration):
             name='Locator',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('location', models.CharField(max_length=500)),
-                ('hours', models.IntegerField()),
+                ('name', models.CharField(max_length=500)),
+                ('address', models.CharField(max_length=50)),
+                ('website',  models.CharField(max_length=30)),
+                ('phone',  models.CharField(max_length=16)),
                 ('reviews', models.TextField(max_length=1000)),
                 ('rating', models.CharField(choices=[('1', '1 Star'), ('2', '2 Star'), ('3', '3 Star'), ('4', '4 Star'), ('5', '5 Star')], default='5', max_length=1)),
             ],
