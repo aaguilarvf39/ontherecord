@@ -32,7 +32,19 @@
      <tbody>
     <tr>
       <br>
-    <td><a href="{% url 'detail' locator.id %}">{{ user.poi.name }}</a></td>&nbsp;
+      <td>
+      <form action="{% url 'detail'  %}"  method="POST" id="form2">
+        {% csrf_token %}
+        <input type="hidden" value="{{ user.poi.name }}" name="name" /> 
+        <input type="hidden" value="{{ user.address.streetNumber }}" name="streetNumber" /> 
+        <input type="hidden" value="{{ user.address.streetName }}" name="streetName" /> 
+        <input type="hidden" value="{{ user.address.municipality }}" name="municipality" /> 
+        <input type="hidden" value="{{ user.address.countrySubdivision }}" name="countrySubdivision" />
+        <input type="hidden" value="{{ user.poi.url }}" name="website" /> 
+        <input type="hidden" value="{{ user.poi.phone }}" name="phone" />  
+      
+    <button type="submit">{{ user.poi.name }}</button></form></td>&nbsp;
+
     <div class="user_address">
       <br>
     <td>{{ user.address.streetNumber }} <br> &nbsp;
