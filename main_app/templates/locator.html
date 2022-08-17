@@ -8,37 +8,51 @@
 <!-- <div>
   {{ lat }}
 </div> -->
+<br>
+<br>
+<br>
+<br>
 <form action="/locator" method="POST" id="form1">
-  <label for="name">&nbsp;What's your address? </label><br>&nbsp;&nbsp;<textarea id="title" name="title" rows="4" cols="50"></textarea> <br>
+  <label for="name" class="address_search">&nbsp;What's your address? </label><br><br><textarea id="title" name="title" rows="4" cols="50"></textarea> <br>
   <button type="submit" form="form1" class="btn btn-success" id="submit-new">Submit</button>
 </form>
+<br>
 
 {% for user in location %}
-<div class="user_address">
+
   <table class="rwd-table">
-  <tr>
-    <th>Name</th>
-    <br>
-    <td>{{ user.poi.name }} </td>
-    <th>Address</th>
-    <br>
-    <td>{{ user.address.streetNumber }} <br>
-      {{ user.address.streetName }} <br>
-      {{ user.address.municipalitySubdivision }} <br>
-      {{ user.address.countrySubdivision }}</td>
-    <th>Website</th>
-    <br>
-    <td>{{ user.poi.url }}</td>
-    <th>Phone</th>
-    <br>
+    <thead>
+      <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Website</th>
+      <th>Phone</th>
+    </tr>
+    </thead>
+     <tbody>
+    <tr>
+      <br>
+    <td>{{ user.poi.name }} </td> &nbsp;
+    <div class="user_address">
+      <br>
+    <td>{{ user.address.streetNumber }} <br> &nbsp;
+      {{ user.address.streetName }} <br> &nbsp;
+      {{ user.address.municipality }} <br> &nbsp;
+      {{ user.address.municipalitySubdivision }}  &nbsp;
+      {{ user.address.countrySubdivision }} </td>
+      </div>
+      <div class="website">
+        <br>
+    <td>{{ user.poi.url }}</td> &nbsp; &nbsp;
+    </div>
+    <div class="phone">
+      <br>
     <td>{{ user.poi.phone }}</td>
-  </tr>
-  
-  
-  
-  
-  
+    </div>
+    </tr>
+   </tbody>
   </table>
+</div>
 </div>
 
 {% endfor %}
