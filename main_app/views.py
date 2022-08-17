@@ -15,7 +15,7 @@ def signup(request):
   if request.method == 'POST':
     # This is how to create a 'user' form object
     # that includes the data from the browser
-    form = UserProfileForm(request.POST)
+    form = UserCreationForm(request.POST)
     if form.is_valid():
       # This will add the user to the database
       user = form.save()
@@ -25,13 +25,13 @@ def signup(request):
     else:
       error_message = 'Invalid sign up - try again'
   # A bad POST or a GET request, so render signup.html with an empty form
-  form = UserProfileForm()
+  form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
 def locator(request):
   api_key = os.environ['API_KEY']
-  query = "1419 Westwood Blvd Los Angeles CA 90024-4911"
+  query = request.POST['query-address']
   useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/{query}.json?key={api_key}')
   address = useraddress.json()
   print(address['results'][0]['position']['lat'])
@@ -39,29 +39,6 @@ def locator(request):
   lon = address['results'][0]['position']['lon']
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
-  print(location)
+  print(request.POST)
   return render(request, 'locator.html', {'location': location, 'lat' : lat })
 
-
-def profile(request):
-	
-	up_form = UserProfileForm(instance=request.user.userprofile)
-	result = "error"
-	message = "Something went wrong. Please check and try again"
-
-	if request.is_ajax() and request.method == "POST":
-		up_form = UserProfileForm(data = request.POST, instance=request.user.userprofile)
-		
-		#if both forms are valid, do something
-		if up_form.is_valid():
-			user = up_form.save()
-
-			up = request.user.userprofile
-			up.has_profile = True
-			up.save()
-
-			result = "perfect"
-			message = "Your profile has been updated"
-			
-		
-	return render(request, 'profile.html')
