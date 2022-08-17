@@ -6,7 +6,7 @@ import requests
 from .forms import UserProfileForm
 import json
 
-# Create your views here.
+# Create your views here
 def home(request):
   return render(request, 'home.html')
 
@@ -36,27 +36,3 @@ def locator(request):
   lon = response.json()['summary']['geoBias']['lon']
   lat = response.json()['summary']['geoBias']['lat']
   return render(request, 'locator.html', {'location': location, 'lon': lon, 'lat': lat})
-
-
-def profile(request):
-	
-	up_form = UserProfileForm(instance=request.user.userprofile)
-	result = "error"
-	message = "Something went wrong. Please check and try again"
-
-	if request.is_ajax() and request.method == "POST":
-		up_form = UserProfileForm(data = request.POST, instance=request.user.userprofile)
-		
-		#if both forms are valid, do something
-		if up_form.is_valid():
-			user = up_form.save()
-
-			up = request.user.userprofile
-			up.has_profile = True
-			up.save()
-
-			result = "perfect"
-			message = "Your profile has been updated"
-			
-		
-	return render(request, 'profile.html')
