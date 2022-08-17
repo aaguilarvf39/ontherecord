@@ -42,8 +42,10 @@ def locator(request):
   lon = address['results'][0]['position']['lon']
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
-  locator = Locator(name='test', address=location)
+  for user in location:
+    locator = Locator(name=user['poi']['name'], address=user['address']['streetNumber'], location=user['address']['countrySubdivision'], hours=user['address']['streetNumber'], website=user['poi']['phone'], phone=user['poi']['phone'])
+  locator.save()
+  all_locations = Locator.objects.all()
   print(request.POST)
-  print(locator)
-  return render(request, 'locator.html', {'location': location, 'lat' : lat })
+  return render(request, 'locator.html', {'location': location, 'lat' : lat, 'all_locations': all_locations })
 
