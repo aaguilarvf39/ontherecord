@@ -13,7 +13,7 @@
 <form action="{% url 'locator' %}" method="POST" id="form1">
   {% csrf_token %}
   <label for="name" class="address_search">&nbsp;Address</label><br><br>
-  <textarea id="title" name="query-address" rows="4" cols="50"></textarea> <br>
+  <textarea id="title" name="query-address" rows="4" cols="50"placeholder="123 State Farm Plaza Bloomington, Il 61710"></textarea> <br>
   <button type="submit" form="form1" class="btn btn-success" id="submit-new">Submit</button>
 </form>
 <br>
@@ -43,7 +43,7 @@
         <input type="hidden" value="{{ user.poi.url }}" name="website" /> 
         <input type="hidden" value="{{ user.poi.phone }}" name="phone" />  
       
-    <button type="submit">{{ user.poi.name }}</button></form></td>&nbsp;
+    <button type="submit" class="business">{{ user.poi.name }}</button></form></td>&nbsp;
 
     <div class="user_address">
       <br>
