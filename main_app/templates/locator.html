@@ -5,9 +5,7 @@
 <hr />
 
 
-<!-- <div>
-  {{ lat }}
-</div> -->
+
 <br>
 <br>
 <br>
@@ -20,7 +18,7 @@
 </form>
 <br>
 
-{% for user in location %}%%
+{% for user in location %}
 
   <table class="rwd-table">
     <thead>
@@ -40,7 +38,6 @@
     <td>{{ user.address.streetNumber }} <br> &nbsp;
       {{ user.address.streetName }} <br> &nbsp;
       {{ user.address.municipality }} <br> &nbsp;
-      {{ user.address.countrySubdivision }} </td>
       {{ user.address.countrySubdivision }} </td>
       </div>
       <div class="website">

@@ -23,7 +23,7 @@ class Locator(models.Model):
         default=RATING[4][0]
     )
     name = models.CharField(max_length=100, null=True)
-    address = models.CharField(max_length=50, null=True)
+    address = models.CharField(max_length=4000, null=True)
     website = models.CharField(max_length=30, null=False, blank=True)
     phone = models.CharField(max_length=16, null=False, blank=True)
 
