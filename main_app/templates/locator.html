@@ -1,27 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Music Shop Locator</h1>
+<h1 class="shop_title">Music Shop Locator</h1>
 <hr />
 
 
-<div>
+<!-- <div>
   {{ lat }}
-  {{ lon }}
-</div>
+</div> -->
+<br>
+<br>
+<br>
+<br>
+<form action="/locator" method="POST" id="form1">
+  <label for="name" class="address_search">&nbsp;What's your address? </label><br><br><textarea id="title" name="title" rows="4" cols="50"></textarea> <br>
+  <button type="submit" form="form1" class="btn btn-success" id="submit-new">Submit</button>
+</form>
+<br>
 
 {% for user in location %}
-<div>
 
-  {{ user.poi.name }}
-  {{ user.address.streetNumber }}
-  {{ user.address.streetName }}
-  {{ user.address.municipalitySubdivision }}
-  {{ user.address.countrySubdivision }}
-  {{ user.poi.url }}
-  {{ user.poi.phone }}
-  
+  <table class="rwd-table">
+    <thead>
+      <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Website</th>
+      <th>Phone</th>
+    </tr>
+    </thead>
+     <tbody>
+    <tr>
+      <br>
+    <td>{{ user.poi.name }} </td> &nbsp;
+    <div class="user_address">
+      <br>
+    <td>{{ user.address.streetNumber }} <br> &nbsp;
+      {{ user.address.streetName }} <br> &nbsp;
+      {{ user.address.municipality }} <br> &nbsp;
+      {{ user.address.municipalitySubdivision }}  &nbsp;
+      {{ user.address.countrySubdivision }} </td>
+      </div>
+      <div class="website">
+        <br>
+    <td>{{ user.poi.url }}</td> &nbsp; &nbsp;
+    </div>
+    <div class="phone">
+      <br>
+    <td>{{ user.poi.phone }}</td>
+    </div>
+    </tr>
+   </tbody>
+  </table>
 </div>
+</div>
+
 {% endfor %}
 
 {% endblock %}
