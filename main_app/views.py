@@ -2,6 +2,7 @@ import os
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from .models import Locator
 import requests
 from .forms import UserProfileForm
 import json
@@ -31,15 +32,18 @@ def signup(request):
 
 def locator(request):
   api_key = os.environ['API_KEY']
-  query = request.POST['query-address']
-  useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/{query}.json?key={api_key}')
+  useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/query.json?key={api_key}')
+  if request.method == 'POST':
+    query = request.POST['query-address']
+    useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/{query}.json?key={api_key}')
   address = useraddress.json()
   print(address['results'][0]['position']['lat'])
   lat = address['results'][0]['position']['lat']
   lon = address['results'][0]['position']['lon']
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
+  locator = Locator(name='test', address=location)
   print(request.POST)
-  print(location)
+  print(locator)
   return render(request, 'locator.html', {'location': location, 'lat' : lat })
 
