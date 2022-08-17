@@ -44,8 +44,18 @@ def locator(request):
   location = response.json()['results']
   for user in location:
     locator = Locator(name=user['poi']['name'], address=user['address']['streetNumber'], location=user['address']['countrySubdivision'], hours=user['address']['streetNumber'], website=user['poi']['phone'], phone=user['poi']['phone'])
-  locator.save()
+    locator.save()
   all_locations = Locator.objects.all()
   print(request.POST)
-  return render(request, 'locator.html', {'location': location, 'lat' : lat, 'all_locations': all_locations })
+  print(all_locations)
+  return render(request, 'locations/locator.html', {'location': location, 'lat' : lat })
 
+def locator_detail(request, locator_id):
+  locator = Locator.objects.get(id=locator_id, user=request.user)
+  return render(
+    request,
+    'locator/detail.html',
+    {
+      'locator': locator
+    }
+  )
