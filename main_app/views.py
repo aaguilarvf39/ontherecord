@@ -40,5 +40,6 @@ def locator(request):
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
   print(request.POST)
+  print(location)
   return render(request, 'locator.html', {'location': location, 'lat' : lat })
 
