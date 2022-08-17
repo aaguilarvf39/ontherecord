@@ -31,7 +31,7 @@ def signup(request):
 
 def locator(request):
   api_key = os.environ['API_KEY']
-  query = "216 Spanish Drive, Las Vegas, NV 89110"
+  query = "1419 Westwood Blvd Los Angeles CA 90024-4911"
   useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/{query}.json?key={api_key}')
   address = useraddress.json()
   print(address['results'][0]['position']['lat'])
