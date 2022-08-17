@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="shop_title">Music Shop Locator</h1>
+<hr />
+
+
+
+<br>
+<br>
+<br>
+<br>
+<form action="{% url 'locator' %}" method="POST" id="form1">
+  {% csrf_token %}
+  <label for="name" class="address_search">&nbsp;Address</label><br><br>
+  <textarea id="title" name="query-address" rows="4" cols="50"></textarea> <br>
+  <button type="submit" form="form1" class="btn btn-success" id="submit-new">Submit</button>
+</form>
+<br>
+
+{% for user in location %}
+
+  <table class="rwd-table">
+    <thead>
+      <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Website</th>
+      <th>Phone</th>
+    </tr>
+    </thead>
+     <tbody>
+    <tr>
+      <br>
+    <td><a href="{% url 'detail' locator.id %}">{{ user.poi.name }}</a></td>&nbsp;
+    <div class="user_address">
+      <br>
+    <td>{{ user.address.streetNumber }} <br> &nbsp;
+      {{ user.address.streetName }} <br> &nbsp;
+      {{ user.address.municipality }} <br> &nbsp;
+      {{ user.address.countrySubdivision }} </td>
+      </div>
+      <div class="website">
+        <br>
+    <td>{{ user.poi.url }}</td> &nbsp; &nbsp;
+    </div>
+    <div class="phone">
+      <br>
+    <td>{{ user.poi.phone }}</td>
+    </div>
+    </tr>
+   </tbody>
+  </table>
+</div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

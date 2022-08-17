@@ -1,6 +1,7 @@
 from sqlite3 import Timestamp
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 RATING = (
@@ -26,6 +27,9 @@ class Locator(models.Model):
     address = models.CharField(max_length=4000, null=True)
     website = models.CharField(max_length=30, null=False, blank=True)
     phone = models.CharField(max_length=16, null=False, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('locator_detail', kwargs=[{'locator.id': self.id}])
 
 class UserProfile(models.Model):
 
