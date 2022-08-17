@@ -14,16 +14,18 @@ RATING = (
 
 # Create your models here.
 class Locator(models.Model):
-    name = models.CharField(max_length=500)
-    address = models.CharField(max_length=50)
-    website = models.CharField(max_length=30)
-    phone = models.CharField(max_length=16)
+    location = models.CharField(max_length=500)
+    hours = models.IntegerField()
     reviews = models.TextField(max_length=1000)
     rating = models.CharField(
         max_length=1,
         choices=RATING,
         default=RATING[4][0]
     )
+    name = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=50, null=True)
+    website = models.CharField(max_length=30, null=False, blank=True)
+    phone = models.CharField(max_length=16, null=False, blank=True)
 
 class UserProfile(models.Model):
 
