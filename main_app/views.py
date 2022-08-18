@@ -51,7 +51,25 @@ def locator(request):
 
 def locator_detail(request):
   print(request.GET, 'locator/detail')
+  #userid = Locator.objects.all.filter(location=['poi']['id'])
+ # if userid is in the database then redirect
+  #else render new detail page for that shop
+ # create a FeedingForm instance using
+  # the data that was submitted via the form
+  form = UserProfileForm(request.POST)
+  print(request.POST)
+  print(form)
+  if form.is_valid():
+    # can't save the form/object to the db
+    # until we've assigned a cat_id
+    new_shop = form.save(commit=False)
+    print(new_shop, new_shop.user_id) 
+   # new_shop.user_id = user_id
+   # new_shop.save()
+  #return redirect('detail', cat_id=cat_id)
  
-
-  locator = Locator.objects.get(address=request.address)
+  #locator = Locator.objects.get(address=request.address)
   return render(request,'locations/detail.html', { 'locator': locator })
+
+
+  
