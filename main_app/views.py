@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Locator, UserProfile
 import requests
-from .forms import UserProfileForm
+from .forms import UserProfileForm, LocatorForm
 import json
 
 # Create your views here.
@@ -42,33 +42,18 @@ def locator(request):
   lon = address['results'][0]['position']['lon']
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
-  #for user in location:
-   # locator = Locator(name=user['poi']['name'], address=user['address']['streetNumber'], location=user['address']['countrySubdivision'], hours=user['address']['streetNumber'], website=user['poi']['phone'], phone=user['poi']['phone'])
-    #locator.save()
-  #all_locations = Locator.objects.all()
-  print(location)
   return render(request, 'locations/locator.html', {'location': location, 'lat' : lat })
 
-def locator_detail(request,):
-  print(request.GET, 'locator/detail')
-  #userid = Locator.objects.all.filter(location=['poi']['id'])
- # if userid is in the database then redirect
-  #else render new detail page for that shop
- # create a FeedingForm instance using
-  # the data that was submitted via the form
-  form = UserProfileForm(request.POST)
-  print(request.POST)
-  # print(form)
-  if form.is_valid():
-
-    new_shop = form.save(commit=False)
-    new_shop.user_id = request.POST['user_id']
-    new_shop.save()
-  
-  #return redirect('detail', cat_id=cat_id)
- 
-  #locator = Locator.objects.get(address=request.address)
-  return render(request,'locations/detail.html', { 'locator': locator })
+def locator_detail(request, shop_id):
+  try:
+    shop = Locator.objects.get(shopId=shop_id)
+    return render(request,'locations/detail.html', { 'shop': shop })
+  except Locator.DoesNotExist:
+    form = LocatorForm(request.POST)
+    if form.is_valid():
+      shop = form.save(commit=False)
+      shop.save()
+    return render(request,'locations/detail.html', { 'shop': shop })
 
 
   

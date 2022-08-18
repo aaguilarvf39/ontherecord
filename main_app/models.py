@@ -15,10 +15,13 @@ RATING = (
 
 # Create your models here.
 class Locator(models.Model):
-    location = models.CharField(max_length=500)
-    hours = models.IntegerField()
     name = models.CharField(max_length=100, null=True)
-    address = models.CharField(max_length=4000, null=True)
+    shopId = models.CharField(max_length=100, null=True)
+    streetNumber = models.CharField(max_length=100, null=True)
+    streetName = models.CharField(max_length=100, null=True)
+    municipality = models.CharField(max_length=100, null=True)
+    countrySubdivision = models.CharField(max_length=100, null=True)
+    freeformAddress = models.CharField(max_length=4000, null=True)
     website = models.CharField(max_length=30, null=False, blank=True)
     phone = models.CharField(max_length=16, null=False, blank=True)
 
@@ -40,7 +43,7 @@ class UserProfile(models.Model):
 
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.BigIntegerField(User, default=0)
     address = models.CharField(verbose_name="Address",max_length=500, null=True, blank=True)
     town = models.CharField(verbose_name="Town/City",max_length=500,null=True, blank=True)
     country = models.CharField(verbose_name="Country",max_length=500,null=True,blank=True)

@@ -18,7 +18,7 @@
 </form>
 <br>
 
-{% for user in location %}
+{% for shop in location %}
 
   <table class="rwd-table">
     <thead>
@@ -33,33 +33,34 @@
     <tr>
       <br>
       <td>
-      <form action="{% url 'detail'  %}"  method="POST" id="form2">
+      <form action="{% url 'detail' shop.id  %}"  method="POST" id="form2">
         {% csrf_token %}
-        <input type="hidden" value="{{ user.id }}" name="user_id" />
-        <input type="hidden" value="{{ user.poi.name }}" name="name" /> 
-        <input type="hidden" value="{{ user.address.streetNumber }}" name="streetNumber" /> 
-        <input type="hidden" value="{{ user.address.streetName }}" name="streetName" /> 
-        <input type="hidden" value="{{ user.address.municipality }}" name="municipality" /> 
-        <input type="hidden" value="{{ user.address.countrySubdivision }}" name="countrySubdivision" />
-        <input type="hidden" value="{{ user.poi.url }}" name="website" /> 
-        <input type="hidden" value="{{ user.poi.phone }}" name="phone" />  
+        <input type="hidden" value="{{ shop.id }}" name="shopId" />
+        <input type="hidden" value="{{ shop.poi.name }}" name="name" /> 
+        <input type="hidden" value="{{ shop.address.streetNumber }}" name="streetNumber" /> 
+        <input type="hidden" value="{{ shop.address.streetName }}" name="streetName" /> 
+        <input type="hidden" value="{{ shop.address.municipality }}" name="municipality" /> 
+        <input type="hidden" value="{{ shop.address.countrySubdivision }}" name="countrySubdivision" />
+        <input type="hidden" value="{{ shop.poi.url }}" name="website" /> 
+        <input type="hidden" value="{{ shop.poi.phone }}" name="phone" />  
+        <input type="hidden" value="{{ shop.address.freeformAddress }}" name="freeformAddress" />  
       
-    <button type="submit" class="business">{{ user.poi.name }}</button></form></td>&nbsp;
+    <button type="submit" class="business">{{ shop.poi.name }}</button></form></td>&nbsp;
 
     <div class="user_address">
       <br>
-    <td>{{ user.address.streetNumber }} <br> &nbsp;
-      {{ user.address.streetName }} <br> &nbsp;
-      {{ user.address.municipality }} <br> &nbsp;
-      {{ user.address.countrySubdivision }} </td>
+    <td>{{ shop.address.streetNumber }} <br> &nbsp;
+      {{ shop.address.streetName }} <br> &nbsp;
+      {{ shop.address.municipality }} <br> &nbsp;
+      {{ shop.address.countrySubdivision }} </td>
       </div>
       <div class="website">
         <br>
-    <td>{{ user.poi.url }}</td> &nbsp; &nbsp;
+    <td>{{ shop.poi.url }}</td> &nbsp; &nbsp;
     </div>
     <div class="phone">
       <br>
-    <td>{{ user.poi.phone }}</td>
+    <td>{{ shop.poi.phone }}</td>
     </div>
     </tr>
    </tbody>
