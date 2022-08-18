@@ -17,12 +17,6 @@ RATING = (
 class Locator(models.Model):
     location = models.CharField(max_length=500)
     hours = models.IntegerField()
-    reviews = models.TextField(max_length=1000)
-    rating = models.CharField(
-        max_length=1,
-        choices=RATING,
-        default=RATING[4][0]
-    )
     name = models.CharField(max_length=100, null=True)
     address = models.CharField(max_length=4000, null=True)
     website = models.CharField(max_length=30, null=False, blank=True)
@@ -30,6 +24,17 @@ class Locator(models.Model):
 
     def get_absolute_url(self):
         return reverse('locator_detail', kwargs=[{'locator.id': self.id}])
+
+
+
+class Review(models.Model):
+    reviews = models.TextField(max_length=1000)
+    rating = models.CharField(
+        max_length=1,
+        choices=RATING,
+        default=RATING[4][0]
+    )
+
 
 class UserProfile(models.Model):
 
