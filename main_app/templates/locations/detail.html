@@ -24,8 +24,22 @@
   </tr>
  </tbody>
 </table>
-</div>
-</div>
 
+{% if shop.review_set.all.count %}
+    {% for review in shop.review_set.all %}
+     <h1>{{ review.review }}</h1>
+      {% endfor %}
+      {% else %}
+     <h1>
+        Write A Review
+     </h1>
+      {% endif %}
+
+
+<form action="{% url 'add_review' shop.shopId %}" method="POST">
+    {% csrf_token %}
+    {{ review_form.as_p }}
+    <button class="btn" type="submit">Add Review</button>
+  </form>
 
 {% endblock %}
