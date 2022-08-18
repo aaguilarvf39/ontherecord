@@ -1,8 +1,9 @@
 import os
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from .models import Locator, UserProfile
+from .models import Locator, UserProfile, Review
 import requests
 from .forms import UserProfileForm, LocatorForm, ReviewForm
 import json
@@ -68,4 +69,11 @@ def add_review(request, shop_id):
     new_review.save()    
   return redirect('detail', shop_id=shop_id)
 
+class ReviewUpdate(UpdateView):
+  model = Review
+  fields = ['review']
+
+# class ReviewDelete(DeleteView):
+#   model = Review
+#   success_url = '/reviews/'
   
