@@ -8,18 +8,15 @@ from .models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
-
-	telephone = forms.CharField(max_length=15, required=True,
-		widget=forms.TextInput(attrs={'placeholder': '*Telephone..'}))
-	address = forms.CharField(max_length=100, required=True, widget = forms.HiddenInput())
-	town = forms.CharField(max_length=100, required=True, widget = forms.HiddenInput())
-	county = forms.CharField(max_length=100, required=True, widget = forms.HiddenInput())
-	post_code = forms.CharField(max_length=8, required=True, widget = forms.HiddenInput())
-	country = forms.CharField(max_length=40, required=True, widget = forms.HiddenInput())
-	longitude = forms.CharField(max_length=50, required=True, widget = forms.HiddenInput())
-	latitude = forms.CharField(max_length=50, required=True, widget = forms.HiddenInput())
-
-
+	user_id = forms.CharField(max_length=500, required=True, widget = forms.HiddenInput())
+	name = forms.CharField(max_length=500, required=True, widget = forms.HiddenInput())
+	streetNumber = forms.CharField(max_length=1000, required=True, widget = forms.HiddenInput())
+	streetName = forms.CharField(max_length=1000, required=True, widget = forms.HiddenInput())
+	municipality = forms.CharField(max_length=1000, required=True, widget = forms.HiddenInput())
+	countrySubdivision = forms.CharField(max_length=800, required=True, widget = forms.HiddenInput())
+	website= forms.CharField(max_length=400, required=True, widget = forms.HiddenInput())
+	phone = forms.CharField(max_length=15, required=True, widget=forms.TextInput(attrs={'placeholder': '*Telephone..'}))
+	
 	class Meta:
 		model = UserProfile
-		fields = ('telephone', 'address', 'town', 'county', 'post_code', 'country', 'longitude', 'latitude')
+		fields = ('user_id','name', 'streetNumber', 'streetNumber', 'streetName', 'municipality', 'countrySubdivision', 'website', 'phone')

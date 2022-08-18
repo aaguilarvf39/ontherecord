@@ -35,6 +35,7 @@
       <td>
       <form action="{% url 'detail'  %}"  method="POST" id="form2">
         {% csrf_token %}
+        <input type="hidden" value="{{ user.id }}" name="user_id" />
         <input type="hidden" value="{{ user.poi.name }}" name="name" /> 
         <input type="hidden" value="{{ user.address.streetNumber }}" name="streetNumber" /> 
         <input type="hidden" value="{{ user.address.streetName }}" name="streetName" /> 
