@@ -1,1 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <h1> this page for reviews </h1>
+
+
+
+<div class="user_address">
+    <br>
+  <td>{{ shop.name }}<br>&nbsp;
+    {{ shop.streetNumber }} <br> &nbsp;
+    {{ shop.streetName }} <br> &nbsp;
+    {{ shop.municipality }} <br> &nbsp;
+    {{ shop.countrySubdivision }} </td>
+    </div>
+    <div class="website">
+      <br>
+  <td>{{ shop.website }}</td> &nbsp; &nbsp;
+  </div>
+  <div class="phone">
+    <br>
+  <td>{{ shop.phone }}</td>
+  </div>
+  </tr>
+ </tbody>
+</table>
+</div>
+</div>
+
+
+{% endblock %}
