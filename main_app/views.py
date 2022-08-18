@@ -2,7 +2,7 @@ import os
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .models import Locator
+from .models import Locator, UserProfile
 import requests
 from .forms import UserProfileForm
 import json
@@ -37,7 +37,7 @@ def locator(request):
     query = request.POST['query-address']
     useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/{query}.json?key={api_key}')
   address = useraddress.json()
-  print(address['results'][0]['position']['lat'])
+  # print(address['results'][0]['position']['lat'])
   lat = address['results'][0]['position']['lat']
   lon = address['results'][0]['position']['lon']
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
@@ -49,7 +49,7 @@ def locator(request):
   print(location)
   return render(request, 'locations/locator.html', {'location': location, 'lat' : lat })
 
-def locator_detail(request):
+def locator_detail(request,):
   print(request.GET, 'locator/detail')
   #userid = Locator.objects.all.filter(location=['poi']['id'])
  # if userid is in the database then redirect
@@ -58,14 +58,13 @@ def locator_detail(request):
   # the data that was submitted via the form
   form = UserProfileForm(request.POST)
   print(request.POST)
-  print(form)
+  # print(form)
   if form.is_valid():
-    # can't save the form/object to the db
-    # until we've assigned a cat_id
+
     new_shop = form.save(commit=False)
-    print(new_shop, new_shop.user_id) 
-   # new_shop.user_id = user_id
-   # new_shop.save()
+    new_shop.user_id = request.POST['user_id']
+    new_shop.save()
+  
   #return redirect('detail', cat_id=cat_id)
  
   #locator = Locator.objects.get(address=request.address)
