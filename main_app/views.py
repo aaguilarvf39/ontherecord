@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Locator, UserProfile
 import requests
-from .forms import UserProfileForm, LocatorForm
+from .forms import UserProfileForm, LocatorForm, ReviewForm
 import json
 
 # Create your views here.
@@ -47,13 +47,25 @@ def locator(request):
 def locator_detail(request, shop_id):
   try:
     shop = Locator.objects.get(shopId=shop_id)
-    return render(request,'locations/detail.html', { 'shop': shop })
+    review_form = ReviewForm()
+    return render(request,'locations/detail.html', { 'shop': shop, 'review_form': review_form })
   except Locator.DoesNotExist:
     form = LocatorForm(request.POST)
     if form.is_valid():
       shop = form.save(commit=False)
       shop.save()
-    return render(request,'locations/detail.html', { 'shop': shop })
+    review_form = ReviewForm()
+    return render(request,'locations/detail.html', { 'shop': shop, 'review_form': review_form })
 
+def add_review(request, shop_id):
+  shop = Locator.objects.get(shopId=shop_id)
+  print(request.POST)
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.locator_id = shop.id
+    new_review.user_id = request.user.id
+    new_review.save()    
+  return redirect('detail', shop_id=shop_id)
 
   
