@@ -4,7 +4,6 @@
 </h1>
 <h2>Ctrl Alt Elites</h2>
 <h3>Joba Aladeselu (Database Manager), Jennifer Hoskins (Scrum Master), Jesus Aguilar (Github Manager)</h3>
- [Heroku deployment link](https://on-the-record-6.herokuapp.com/) 
  <h1>:open_book:Description:open_book:</h1>
 <p>Ctrl Alt Elites presents a new and groovy way to locate some wicked tunes near you! #Musiclovers</p>
 </div>
@@ -12,9 +11,9 @@
 ## :computer: Screenshots :computer:
 | Description | Screenshot |
 |------------ | ------------|
-| Landing Page | <img src=“https://imgur.com/7yO6qVZ.jpg” width=“600”> |
-| Locator | <img src=“https://imgur.com/Jlsno7p.jpg” width=“600”> |
-| Reviews | <img src=“https://imgur.com/b6Gzf27.jpg” width=“600”> |
+| Landing Page | <img src=“https://imgur.com/p7XfyRl.png” width=“600”> |
+| Locator | <img src=“https://imgur.com/wgd9Oaw.png” width=“600”> |
+| Reviews | <img src=“https://imgur.com/UZ0aIS5.png” width=“600”> |
 
 ## :hammer_and_wrench: Built With:
 ![Python](https://img.shields.io/badge/-Python-05122A?style=flat&logo=python)
@@ -26,6 +25,7 @@
 ![Trello](https://img.shields.io/badge/-Trello-05122A?style=flat&logo=trello)
 
 [Trello Board](https://trello.com/b/mdkoYGtT/p3-on-the-record)
+[Heroku deployment link](https://on-the-record-6.herokuapp.com/) 
 
 ## :seedling: Next Steps :seedling:
 ### Looking Ahead
