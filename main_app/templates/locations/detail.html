@@ -1,52 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1> this page for reviews </h1>
+<h1 class="shop_title"> Business Details </h1>
 
 
 
-<div class="user_address">
-    <br>
+
+<section class="user_address">
   <td>{{ shop.name }}<br>&nbsp;
     {{ shop.streetNumber }} <br> &nbsp;
     {{ shop.streetName }} <br> &nbsp;
     {{ shop.municipality }} <br> &nbsp;
-    {{ shop.countrySubdivision }} </td>
-    </div>
-    <div class="website">
-      <br>
-  <td>{{ shop.website }}</td> &nbsp; &nbsp;
-  </div>
-  <div class="phone">
-    <br>
+    {{ shop.countrySubdivision }} </td><br>
+  <td>{{ shop.website }}</td> &nbsp; &nbsp;<br>
   <td>{{ shop.phone }}</td>
-  </div>
+  </section>
   </tr>
  </tbody>
 </table>
-
+ 
 {% if shop.review_set.all.count %}
     {% for review in shop.review_set.all %}
      <h1>{{ review.review }}</h1>
+     {% if user.id == review.user_id %}
+     <div class="edit">
+        <a href="{% url 'update_review' review.id %}">Edit</a>
+        <a href="{% url 'delete_review' review.id %}">Delete</a>
+      </div>
+      {% endif %}
       {% endfor %}
       {% else %}
-     <h1>
-        Write A Review
-     </h1>
+     <h1 class="reviewheader" >&#127926; &nbsp; Write A Review &nbsp; &#127926;</h1>
       {% endif %}
+     
 
-
-<form action="{% url 'add_review' shop.shopId %}" method="POST">
+<form action="{% url 'add_review' shop.shopId %}" method="POST" class="reviews">
     {% csrf_token %}
-    {{ review_form.as_p }}
-    <button class="btn" type="submit">Add Review</button>
+    {{ review_form.as_div}}
+    <button class="addbtn" type="submit">Add Review</button>
   </form>
 
 
-  <div class="card-action">
-    <a href="">Edit</a>
-    <a href="">Delete</a>
-  </div>
+  
 
 
 
