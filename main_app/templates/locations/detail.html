@@ -2,10 +2,8 @@
 {% block content %}
 
 <h1 class="shop_title"> Business Details </h1>
-
-
-
-
+<br><br><br>
+<section class="detailbox">
 <section class="user_address">
   <td>{{ shop.name }}<br>&nbsp;
     {{ shop.streetNumber }} <br> &nbsp;
@@ -30,6 +28,7 @@
       {% endif %}
       {% endfor %}
       {% else %}
+      <br><br><br>
      <h1 class="reviewheader" >&#127926; &nbsp; Write A Review &nbsp; &#127926;</h1>
       {% endif %}
      
@@ -39,6 +38,7 @@
     {{ review_form.as_div}}
     <button class="addbtn" type="submit">Add Review</button>
   </form>
+</section>
 
 
   
