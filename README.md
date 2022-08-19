@@ -8,12 +8,11 @@
 <p>Ctrl Alt Elites presents a new and groovy way to locate some wicked tunes near you! #Musiclovers</p>
 </div>
 
-## :computer: Screenshots :computer:
-| Description | Screenshot |
-|------------ | ------------|
-| Landing Page | <img src=“https://imgur.com/p7XfyRl.png” width=“600”> |
-| Locator | <img src=“https://imgur.com/wgd9Oaw.png” width=“600”> |
-| Reviews | <img src=“https://imgur.com/UZ0aIS5.png” width=“600”> |
+## Preview ##
+
+![Landing Page](https://imgur.com/p7XfyRl.png)
+![Shop Locator](https://imgur.com/wgd9Oaw.png)
+![Business Detail Page](https://imgur.com/UZ0aIS5.png)
 
 ## :hammer_and_wrench: Built With:
 ![Python](https://img.shields.io/badge/-Python-05122A?style=flat&logo=python)
