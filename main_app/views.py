@@ -6,31 +6,31 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Locator, UserProfile, Review
 import requests
 from .forms import UserProfileForm, LocatorForm, ReviewForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 import json
 
-# Create your views here.
+
 def home(request):
   return render(request, 'home.html')
 
 def signup(request):
   error_message = ''
   if request.method == 'POST':
-    # This is how to create a 'user' form object
-    # that includes the data from the browser
     form = UserCreationForm(request.POST)
     if form.is_valid():
-      # This will add the user to the database
       user = form.save()
-      # This is how we log a user in via code
       login(request, user)
       return redirect('index')
     else:
       error_message = 'Invalid sign up - try again'
-  # A bad POST or a GET request, so render signup.html with an empty form
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+
+
+@login_required
 def locator(request):
   api_key = os.environ['API_KEY']
   useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/query.json?key={api_key}')
@@ -38,13 +38,15 @@ def locator(request):
     query = request.POST['query-address']
     useraddress = requests.get(f'https://api.tomtom.com/search/2/geocode/{query}.json?key={api_key}')
   address = useraddress.json()
-  # print(address['results'][0]['position']['lat'])
   lat = address['results'][0]['position']['lat']
   lon = address['results'][0]['position']['lon']
   response = requests.get(f"https://api.tomtom.com/search/2/nearbySearch/.json?lat={lat}&lon={lon}&radius=10000&categorySet=9361059&view=Unified&relatedPois=off&key={ api_key }")
   location = response.json()['results']
   return render(request, 'locations/locator.html', {'location': location, 'lat' : lat })
 
+
+
+@login_required
 def locator_detail(request, shop_id):
   try:
     shop = Locator.objects.get(shopId=shop_id)
@@ -58,6 +60,9 @@ def locator_detail(request, shop_id):
     review_form = ReviewForm()
     return render(request,'locations/detail.html', { 'shop': shop, 'review_form': review_form })
 
+
+
+@login_required
 def add_review(request, shop_id):
   shop = Locator.objects.get(shopId=shop_id)
   print(request.POST)
@@ -69,11 +74,13 @@ def add_review(request, shop_id):
     new_review.save()    
   return redirect('detail', shop_id=shop_id)
 
-class ReviewUpdate(UpdateView):
+
+
+class ReviewUpdate(UpdateView, LoginRequiredMixin):
   model = Review
   fields = ['review']
 
-# class ReviewDelete(DeleteView):
-#   model = Review
-#   success_url = '/reviews/'
+class ReviewDelete(DeleteView, LoginRequiredMixin):
+   model = Review
+   success_url = '/'
   

@@ -17,22 +17,9 @@
   <button type="submit" form="form1" class="btn btn-success" id="submit-new">Submit</button>
 </form>
 <br>
-
+<section class="location">
 {% for shop in location %}
 
-  <table class="rwd-table">
-    <thead>
-      <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Website</th>
-      <th>Phone</th>
-    </tr>
-    </thead>
-     <tbody>
-    <tr>
-      <br>
-      <td>
       <form action="{% url 'detail' shop.id  %}"  method="POST" id="form2">
         {% csrf_token %}
         <input type="hidden" value="{{ shop.id }}" name="shopId" />
@@ -45,29 +32,9 @@
         <input type="hidden" value="{{ shop.poi.phone }}" name="phone" />  
         <input type="hidden" value="{{ shop.address.freeformAddress }}" name="freeformAddress" />  
       
-    <button type="submit" class="business">{{ shop.poi.name }}</button></form></td>&nbsp;
-
-    <div class="user_address">
-      <br>
-    <td>{{ shop.address.streetNumber }} <br> &nbsp;
-      {{ shop.address.streetName }} <br> &nbsp;
-      {{ shop.address.municipality }} <br> &nbsp;
-      {{ shop.address.countrySubdivision }} </td>
-      </div>
-      <div class="website">
-        <br>
-    <td>{{ shop.poi.url }}</td> &nbsp; &nbsp;
-    </div>
-    <div class="phone">
-      <br>
-    <td>{{ shop.poi.phone }}</td>
-    </div>
-    </tr>
-   </tbody>
-  </table>
-</div>
-</div>
-
+    <div><button type="submit" class="business">{{ shop.poi.name }}</button></form></div>&nbsp;
+ 
+  
 {% endfor %}
-
+</section>
 {% endblock %}

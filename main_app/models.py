@@ -27,6 +27,8 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     locator = models.ForeignKey(Locator, on_delete=models.CASCADE)
 
+    def get_absolute_url(self):
+        return reverse('detail', kwargs=({'shop_id': self.locator.shopId}))
 
 class UserProfile(models.Model):
 
